@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NNNNNNN</title>
+    <style>
+      /* thumbr.it */
+
+      /* Variables */
+      :root {
+        --theme: red;
+        --font-mono: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier,
+          monospace;
+      }
+
+      /* Keyframes */
+      @keyframes blink {
+        0.01% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 0;
+        }
+        50.01% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes scanline {
+        0.01% {
+          height: 0;
+        }
+        99.99% {
+          height: 100%;
+        }
+        100% {
+          height: 0;
+        }
+      }
+
+      /* Styles */
+      html {
+        font-family: var(--font-mono);
+        text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+        background-size: 100px;
+        color: var(--theme);
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        padding: 16px;
+        --palletHR: 0deg;
+        --pallet1: #131323;
+        --pallet2: #551512;
+        --pallet3: #8d1003;
+        --pallet4: #00edff;
+        background: repeating-linear-gradient(
+            to bottom,
+            transparent 0px 0.3vh,
+            rgba(0, 0, 0, 0.25) 0.3vh 0.5vh
+          ),
+          radial-gradient(at center top, var(--pallet3), transparent 75%) center -50vh /
+            200vw 150vh no-repeat fixed,
+          var(--pallet1);
+      }
+
+      p,
+      pre {
+        font-family: var(--font-mono);
+        font-size: inherit;
+        line-height: 1;
+        margin: 0;
+        display: block;
+        padding: 5px;
+      }
+
+      .blink {
+        opacity: 1;
+        animation: blink 1s linear infinite;
+      }
+
+      .scanline {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.02);
+        animation: scanline 8s linear infinite;
+        pointer-events: none;
+      }
+
+      #photo {
+        border-top: 2px solid red;
+        border-left: 2px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="scanline"></div>
+    <pre class="code"><span class="blink">█</span></pre>
+
+    <script>
+      const commands = String.raw`north@wilo/:~ cd HBD
+north@wilo/HBD/:~ ls`;
+
+      const beep = String.raw`
+      ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⠿⠓⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⡟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⠃⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⣿⡟⠀⢀⡆⠀⠀⠀⠀⠀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡼⠀⠅⠀⠀⠀⠀⢀⡄⠀⠀⠀⣿⣿⣿⣗⣠⣾⡇⠀⠀⠀⠀⢠⠆⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⢸⣆⠀⠀⢰⣿⣿⣿⣿⣿⣯⠀⢀⣴⠆⠀⠻⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡼⣷⠀⠀⠀⠀⠀⠀⢸⣿⠀⢀⣾⣿⣿⣿⣿⣿⡿⣥⣾⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⡆⠀⠀⣀⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⢹⣿⠀⠀⠀⣴⠃⠀⣠⡆⢀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠱⣄⠀⠀⠀⠀⠈⣿⡇⠀⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠀⠘⠁⠀⠀⣰⣿⠀⢰⠟⠀⣤⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⠀⠀⠙⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⢀⠁⠀⢀⣰⣿⣿⡿⠆⠈⠀⣰⣷⡄⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠘⢿⣦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⡾⣧⡜⠀⣠⣿⣿⣿⣿⡿⠋⣹⣿⣿⣿⠟⢸⣿⣦⣴⣿⣿⣿⡿⠁⠀⠀⣾⣿⣿⠁⠀⠀⠀⠀
+⠀⠀⠀⠀⢀⠀⠀⢹⣿⣧⠀⠀⠀⠀⡀⢀⣾⢀⣿⣿⣿⣾⣿⣿⣿⣿⠛⠁⢠⠿⠟⠉⠁⠀⢸⣹⣿⣿⠛⠻⣯⠁⠀⠀⣀⣿⠿⠁⠀⠀⠀⣆⢹
+⠀⠀⠰⣄⠸⣷⡄⠀⢿⣟⠀⠀⠀⠀⣷⡀⣇⠀⣿⣿⠿⣿⠛⣿⠏⠀⠀⡄⠀⢀⣴⡾⠁⠀⣼⣿⡿⠏⠀⠐⣿⡄⠀⣰⠋⠀⠀⣺⠀⠀⠀⢹⣘
+⠀⠀⠠⣽⣶⡿⠇⠀⠀⢉⠀⠶⠒⠀⠘⢷⣿⣥⠈⠿⠀⠘⢆⠘⠀⢠⣿⡁⠀⣾⣿⠃⠀⣸⢿⣿⣇⣀⠀⢀⣿⡇⠀⡘⠀⠀⠸⣿⠀⠀⠀⢸⠁
+⠀⠀⠀⠘⠋⢀⠀⣄⠀⣆⠁⣾⣿⣧⠀⠘⣿⣿⣦⢸⣦⠀⠈⣤⣼⣿⣿⣿⣾⡿⠁⠀⠈⣠⣾⣿⣿⣿⣿⣿⣿⡇⢀⣧⠀⠲⣀⣿⡆⠀⠐⠀⠀
+⠀⠀⠀⠀⡶⢠⣾⡿⠷⠿⢷⣿⣿⣿⠇⠀⠋⢹⣿⣶⣿⣷⣶⣿⣿⣿⠋⠉⣿⠃⠀⢀⣾⣿⣿⣿⣿⡿⠻⠙⠿⡇⠈⣿⠁⠀⣿⠏⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⡀⠙⡁⠶⣿⡿⢒⣠⠀⡤⠀⢐⠀⠸⣿⣿⣿⣿⣿⡟⠉⢿⠀⢸⣿⡀⠀⢸⣿⣿⣿⠟⠁⠀⠀⠀⠀⢱⠀⠎⠠⠔⠁⠀⠀⠀⠀⠀⠀
+⠀⠀⣶⠀⡇⢄⠘⠲⣦⠰⠟⠉⠒⠲⡄⠀⠁⢸⣿⠟⠁⢸⠟⢣⠀⠻⡀⠘⢿⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀⠀⠀⠘⡆⠀⣶⠃⣰⡆⠀⠀⠀⠀⠀
+⠂⠀⣿⣦⠈⠈⠛⢶⣦⠀⡸⡀⠀⠀⡸⠀⠀⠈⠁⠀⠰⠃⠀⢸⣄⠀⠘⠂⡀⢻⣿⡿⠟⠀⢤⠀⠀⠀⠀⠀⠀⢰⠗⢠⡯⢰⣿⠁⠀⠀⠀⠀⠀
+⠀⣼⣿⡿⠁⠀⠈⢀⣄⠀⠷⣬⣑⡨⣴⡇⣴⠀⢀⣄⣠⣤⣴⣿⣾⣷⢄⡀⠀⠈⠀⠀⠈⠓⠋⠀⠀⠀⠀⢀⣼⠏⠀⣸⡇⢨⡏⠀⠀⠀⠀⠀⠀
+⠀⢫⣿⡃⠀⢰⣿⣦⣅⡀⠛⠶⠶⠶⠌⠁⠀⠀⠀⠀⠉⠉⣿⣹⣿⠉⠙⣌⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⡞⠁⠀⣰⢫⡇⠈⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠈⠇⠘⠘⢿⣥⣀⠉⠛⣿⣷⣶⣿⣿⡟⢀⣴⠂⠀⠀⠀⠹⣿⣧⡀⠀⠙⢦⡀⠀⠀⢦⣄⣤⣨⣭⣤⣠⠴⠋⠀⠸⠁⠀⢦⡀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⣬⣙⡛⠓⠒⢒⢀⣤⠀⣄⠻⣿⣄⠀⠀⠀⢀⣿⣿⣽⣦⡀⠀⠀⠳⣄⡀⠀⠈⠛⠛⠛⠁⠀⡠⠞⠁⠀⠻⣦⡹⣦⡐⢄⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⣻⠟⣛⣃⣸⣿⡇⣹⣿⡷⠀⣠⠟⢻⣿⢿⠛⠋⠃⡄⠀⠈⢿⣶⣶⠦⢶⡖⠆⢁⣄⠐⢿⣷⣄⠈⠻⣌⢻⣆⠡⡀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⢋⣼⣿⣿⡿⠙⢁⣾⣿⡇⠀⠀⣠⣾⣿⠀⠀⠀⣴⠃⠀⣀⣀⡈⠉⠛⢷⣾⠀⠻⣿⣷⣄⠙⠛⣡⣄⡹⣧⠹⡇⢱
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠘⠗⣠⣌⠛⠀⠹⠿⠿⣇⠀⠀⠻⠿⠋⠀⠀⠋⠁⡔⠚⠉⣉⡋⠐⠀⠀⢟⠀⠀⠈⠻⣿⠇⣀⠈⠛⢛⣿⡗⢃⡌
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⢛⣴⣿⣿⣧⠰⣷⢰⡆⣶⢠⠀⠰⣦⣤⣤⣴⠶⠉⠀⢰⣾⣿⣿⣦⠈⠀⠀⠀⠀⠀⠀⠨⡘⢿⣿⣿⣿⣿⠇⡼⠀
+⠀⠀⠀⠀⢀⣀⣤⠶⢟⣫⣴⣿⣿⣿⣿⠏⠰⣤⡤⠔⠀⠀⠀⠀⠉⠉⠉⠁⠀⠀⠀⠈⠻⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠈⠒⠦⠭⠭⠥⠚⠀⠀
+⠀⠀⠴⠞⣛⣭⣴⣾⣿⣿⣿⣿⠿⠛⣡⢸⣷⣌⠓⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠀⣦⠐⣌⠻⢿⣿⣿⣷⣦⣬⣓⡒⠤⠤⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠤⣭⣭⣭⣭⣭⣭⣭⣭⠐⢶⡃⠉⠘⠿⠿⠈⡁⣠⣾⣿⣿⢿⣷⣶⣄⡙⠂⢾⣿⠀⠟⣡⣤⣍⡛⠻⢿⣿⣿⣿⡿⠶⢒⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠈⠉⠁⠀⠀⠀⠀⠈⢿⣤⣀⣀⣦⠿⠛⠉⢁⡀⠀⢀⣀⡀⠙⠹⠿⣷⣦⣤⣞⣿⣿⠟⠀⠘⠓⠲⠶⠶⠒⠋⠁⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠓⠋⣡⡴⢁⣴⣿⣿⣦⣶⣿⣷⣄⠀⢶⣤⣭⠍⠛⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢁⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⠄⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⠿⠿⠟⠻⠿⠿⠟⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+########################################################################
+      `;
+
+      const samurai = String.raw`
+      ดีคับพี่นอธ!
+
+          ยังไงวันเกิดปีนี้ก็มีความสุขมากๆ นะครับ ขอให้ปีนี้พบแต่โชคดีๆ
+          ไม่เจอปัญหาใดๆ แต่ถ้ามีปัญหาอะไรก็ขอให้แก้ไขได้ทุกอย่าง
+          สุขภาพแข็งแรง รวยๆ~ แล้วก็มีอะไรทักมาได้ตลอดเลยนะครับผมพร้อมช่วยยย
+          ยังไงก็มีความสุขมากๆสำหรับวันเกิดพี่นอธในปีนี้ครับ!!
+          
+      แล้วก็ผมวาดรูปไม่เก่ง เลยเจ็นรูปมาให้คับ เป็นพี่นอธ Cyberpunk ภาคผู้หญิง 555555 ยังไงก็ Enjoy คนับ!!!
+      `;
+
+      let blink = document.querySelector(".blink");
+      const code = document.querySelector(".code");
+
+      const RandomNumber = (min, max) => {
+        return Math.floor(Math.random() * max) + min;
+      };
+
+      const Delay = (time) => {
+        return new Promise((resolve) => setTimeout(resolve, time));
+      };
+
+      const ResetTerminal = () => {
+        code.innerHTML = '<span class="blink">█</span>';
+        blink = document.querySelector(".blink");
+      };
+
+      const RenderString = (characters) => {
+        blink.insertAdjacentHTML("beforeBegin", characters);
+      };
+
+      const TypeString = async (characters) => {
+        for (const character of characters.split("")) {
+          await Delay(RandomNumber(75, 100));
+          RenderString(character);
+        }
+      };
+
+      const DrawLines = async (characters, min = 50, max = 500) => {
+        for (const line of characters.split("\n")) {
+          await Delay(RandomNumber(min, max));
+          RenderString(`${line}\n`);
+        }
+      };
+
+      const DrawCommands = async (commands) => {
+        for (const line of commands.split("\n")) {
+          // Seperate the directory and the command
+          const [currentDir, command] = line.split(":~ ");
+
+          // Print the directory, type the command and finish with new line
+          RenderString(`${currentDir}:~ `);
+          await TypeString(command);
+          RenderString("\n");
+        }
+      };
+
+      // Start the code
+      (async () => {
+        await DrawCommands("/:~ ssh north@wilo -p 2000");
+        await Delay(1000);
+        RenderString("north@wilo password:");
+        await Delay(3000);
+        RenderString("\n");
+        await DrawCommands(commands);
+        RenderString("\nErroR.js    HBD_CARD.js\n\n");
+        await DrawCommands(
+          "north@wilo/HBD:~ node ErroR.js"
+        );
+        await DrawLines(beep);
+        await TypeString(
+          "\nHey watch out!!, wrong room choom."
+        );
+        await Delay(3000);
+        ResetTerminal();
+        await DrawCommands(
+          "north@wilo/HBD:~ KEY=3db7ca618243da1ba3bc76ab14bcf07b node HBD_CARD.js"
+        );
+        await DrawLines(samurai);
+        blink.insertAdjacentHTML("beforebegin", '<img src="" id="photo">\n\n');
+        photo = document.getElementById("photo");
+        photo.src = "hm.jpg";
+        photo.style.width = "50%";
+        photo.style.height = "50%";
+        photo.style.marginLeft = "100px";
+        await DrawCommands("north@wilo/HBD:~ sign out");
+      })();
+    </script>
+  </body>
+</html>
